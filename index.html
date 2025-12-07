@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ведущая праздничных мероприятий</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #8B4789;
+            --secondary: #D4AF37;
+            --dark: #2C1810;
+            --light: #FFF8F0;
+            --accent: #C97064;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background: linear-gradient(135deg, var(--light) 0%, #FFE8D6 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: white;
+            border-radius: 30px;
+            box-shadow: 
+                0 20px 60px rgba(139, 71, 137, 0.15),
+                0 0 0 1px rgba(212, 175, 55, 0.1);
+            overflow: hidden;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .decorative-corner {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle at top right, var(--secondary), transparent);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .decorative-corner-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle at bottom left, var(--primary), transparent);
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #A65BA4 100%);
+            padding: 60px 40px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 20px,
+                rgba(255, 255, 255, 0.03) 20px,
+                rgba(255, 255, 255, 0.03) 40px
+            );
+            animation: shimmer 20s linear infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50%, 50%); }
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2em;
+            font-weight: 700;
+            color: white;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 1;
+            animation: slideIn 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: rgba(255, 255, 255, 0.95);
+            margin-top: 15px;
+            font-weight: 300;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+            animation: slideIn 1s ease-out 0.5s both;
+        }
+
+        .content {
+            padding: 50px 40px;
+            position: relative;
+        }
+
+        .photo-container {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 40px;
+            position: relative;
+            animation: scaleIn 0.8s ease-out 0.6s both;
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .photo-frame {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid var(--secondary);
+            box-shadow: 
+                0 15px 40px rgba(139, 71, 137, 0.25),
+                0 0 0 12px rgba(212, 175, 55, 0.1);
+            position: relative;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-placeholder {
+            font-size: 4em;
+            color: var(--primary);
+            opacity: 0.3;
+        }
+
+        .description {
+            text-align: center;
+            font-size: 1.25em;
+            line-height: 1.8;
+            color: var(--dark);
+            max-width: 600px;
+            margin: 0 auto 50px;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .description p {
+            margin-bottom: 20px;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .contact-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary) 0%, #C9A962 100%);
+            color: white;
+            padding: 18px 50px;
+            border-radius: 50px;
+            border: none;
+            font-size: 1.3em;
+            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            letter-spacing: 2px;
+            box-shadow: 
+                0 10px 30px rgba(212, 175, 55, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: pulse 2s ease-in-out infinite, fadeInUp 1s ease-out 1s both;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 
+                    0 10px 30px rgba(212, 175, 55, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 15px 40px rgba(212, 175, 55, 0.6),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .contact-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .contact-button:hover::before {
+            left: 100%;
+        }
+
+        .contact-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 
+                0 15px 40px rgba(212, 175, 55, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+
+        .contact-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .button-container {
+            text-align: center;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid rgba(139, 71, 137, 0.1);
+        }
+
+        .feature {
+            text-align: center;
+            padding: 20px;
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .feature:nth-child(1) { animation-delay: 1.1s; }
+        .feature:nth-child(2) { animation-delay: 1.2s; }
+        .feature:nth-child(3) { animation-delay: 1.3s; }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3em;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .feature-text {
+            font-size: 1.1em;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2em;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .description {
+                font-size: 1.1em;
+            }
+            
+            .photo-container {
+                width: 220px;
+                height: 220px;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(44, 24, 16, 0.8);
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 25px;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .close-button {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2em;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(139, 71, 137, 0.1);
+        }
+
+        .close-button:hover {
+            background: rgba(139, 71, 137, 0.2);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2em;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .contact-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .email-text {
+            font-size: 1.4em;
+            color: var(--dark);
+            word-break: break-all;
+            margin-bottom: 20px;
+            font-weight: 400;
+        }
+
+        .copy-button {
+            background: linear-gradient(135deg, var(--primary) 0%, #A65BA4 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(139, 71, 137, 0.3);
+        }
+
+        .copy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(139, 71, 137, 0.4);
+        }
+
+        .copy-button:active {
+            transform: translateY(0);
+        }
+
+        .copy-notification {
+            display: none;
+            color: #4CAF50;
+            font-size: 1em;
+            margin-top: 15px;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .copy-notification.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="decorative-corner"></div>
+        <div class="decorative-corner-bottom"></div>
+        
+        <div class="header">
+            <h1>Ведущая праздничных мероприятий</h1>
+            <div class="subtitle">Создаю незабываемые моменты</div>
+        </div>
+        
+        <div class="content">
+            <div class="photo-container">
+                <div class="photo-frame">
+                    <img src="Imag/083.jpg" alt="Ведущая">
+                </div>
+            </div>
+            
+            <div class="description">
+                <p>
+                    Приветствую! Я — <span class="highlight">профессиональная ведущая</span> с многолетним опытом проведения самых разнообразных мероприятий.
+                </p>
+                <p>
+                    От элегантных свадеб до корпоративных праздников — я помогу создать атмосферу, которая запомнится вам и вашим гостям надолго. Индивидуальный подход, живая энергетика и внимание к каждой детали — вот мой секрет успешного праздника!
+                </p>
+            </div>
+            
+            <div class="button-container">
+                <button class="contact-button" onclick="openModal()">Связаться</button>
+            </div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">💍</div>
+                    <div class="feature-title">Свадьбы</div>
+                    <div class="feature-text">Романтичные и незабываемые церемонии</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎉</div>
+                    <div class="feature-title">Корпоративы</div>
+                    <div class="feature-text">Профессиональные мероприятия любого масштаба</div>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎈</div>
+                    <div class="feature-title">Юбилеи</div>
+                    <div class="feature-text">Теплые семейные праздники</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно с контактами -->
+    <div id="contactModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeModal()">&times;</span>
+            <h2 class="modal-header">Контакты</h2>
+            <div class="contact-info">
+                <div class="contact-icon">✉️</div>
+                <div class="email-text">AleksaLebede60@yandex.ru</div>
+                <button class="copy-button" onclick="copyEmail()">Скопировать email</button>
+                <div id="copyNotification" class="copy-notification">✓ Email скопирован!</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById('contactModal').classList.add('show');
+        }
+
+        function closeModal() {
+            document.getElementById('contactModal').classList.remove('show');
+        }
+
+        // Закрытие модального окна при клике вне его
+        window.onclick = function(event) {
+            const modal = document.getElementById('contactModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+
+        // Закрытие по клавише Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        function copyEmail() {
+            const email = 'AleksaLebede60@yandex.ru';
+            
+            // Копирование в буфер обмена
+            navigator.clipboard.writeText(email).then(function() {
+                // Показываем уведомление
+                const notification = document.getElementById('copyNotification');
+                notification.classList.add('show');
+                
+                // Скрываем уведомление через 3 секунды
+                setTimeout(function() {
+                    notification.classList.remove('show');
+                }, 3000);
+            }).catch(function(err) {
+                console.error('Ошибка копирования: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
